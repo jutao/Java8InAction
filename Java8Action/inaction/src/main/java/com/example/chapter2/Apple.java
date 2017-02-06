@@ -12,6 +12,11 @@ public class Apple {
         this.color = color;
     }
 
+    public Apple(String color, int weight) {
+        this.color = color;
+        this.weight = weight;
+    }
+
     public String getColor() {
         return color;
     }
