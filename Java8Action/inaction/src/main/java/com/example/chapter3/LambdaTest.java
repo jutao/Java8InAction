@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
 /**
@@ -16,12 +18,30 @@ public class LambdaTest {
     public static void main(String[] args) {
 //        lambdaTest();
 //        predicateTest();
-        consumerTest();
+//        consumerTest();
+//        functionTest();
+        IntPredicate evenNumbers=(int i)->i%2==0;
+        System.out.println(evenNumbers.test(1000));
+    }
+
+    private static void functionTest() {
+       List<Integer> lengths=map(Arrays.asList("hello", "world", "ok"), String::length);
+        for (Integer length : lengths) {
+            System.out.println(length);
+        }
+    }
+
+    public static <T, R> List<R> map(List<T> list, Function<T, R> f) {
+        List<R> result = new ArrayList<>();
+        for (T t : list) {
+            result.add(f.apply(t));
+        }
+        return result;
     }
 
     private static void consumerTest() {
         Consumer<Integer> consumer = System.out::println;
-        forEach(Arrays.asList(1,2,3,4),consumer);
+        forEach(Arrays.asList(1, 2, 3, 4), consumer);
     }
 
     private static <T> void forEach(List<T> list, Consumer<T> c) {
@@ -74,4 +94,6 @@ public class LambdaTest {
     public interface BufferedReaderProcessor {
         String process(BufferedReader b) throws IOException;
     }
+
+
 }
